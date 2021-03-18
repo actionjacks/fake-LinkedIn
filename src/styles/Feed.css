@@ -38,5 +38,6 @@ input[type="text"] {
 }
 .feed__inputOptions {
   display: flex;
+  line-height: 0;
   justify-content: space-evenly;
 }

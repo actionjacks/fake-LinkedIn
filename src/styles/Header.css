@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-evenly;
   border-bottom: 0.1px solid lightgray;
+  background-color: white;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
@@ -33,4 +34,7 @@
 }
 .header__right {
   display: flex;
+}
+input[type="text"] {
+  background-color: transparent;
 }

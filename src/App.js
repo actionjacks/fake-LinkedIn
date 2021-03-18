@@ -1,18 +1,48 @@
-import React from "react";
-import { Counter } from "./features/counter/Counter";
+import React, { useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Feed from "./components/Feed";
+import Login from "./components/Login";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser, login, logout } from "./features/userSlice";
+//firebase
+import { auth } from "./firebase";
 
 function App() {
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    auth.onAuthStateChanged((userAuth) => {
+      if (userAuth) {
+        //user is logged in
+        dispatch(
+          login({
+            email: userAuth.email,
+            uid: userAuth.uid,
+            displayName: userAuth.displayName,
+            photoUrl: userAuth.photoURL,
+          })
+        );
+      } else {
+        dispatch(logout());
+      }
+    });
+  }, []);
+
   return (
     <div className="app">
       <Header />
-      <div className="app__body">
-        <Sidebar />
-        <Feed />
-      </div>
+      {!user ? (
+        <Login />
+      ) : (
+        <div className="app__body">
+          <Sidebar />
+          <Feed />
+        </div>
+      )}
     </div>
   );
 }
