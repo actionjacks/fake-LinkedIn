@@ -11,12 +11,15 @@ import WorkIcon from "@material-ui/icons/Work";
 import EmailIcon from "@material-ui/icons/Email";
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 //redux
-import { useDispatch } from "react-redux";
-import { logout } from "../features/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { logout, selectUser } from "../features/userSlice";
 //firebase
 import { auth } from "../firebase";
 
 function Header() {
+  //user from redux
+  const user = useSelector(selectUser);
+  //console.log(user);
   const dispatch = useDispatch();
 
   const logoutOfApp = () => {
@@ -40,7 +43,7 @@ function Header() {
         <HeaderOptions Icon={EmailIcon} title="Messaging" />
         <HeaderOptions Icon={NotificationsNoneIcon} title="Notification" />
         <HeaderOptions
-          avatar="https://i.pinimg.com/originals/66/82/ee/6682eefea7e94a9a4336a4cbc0e741da.jpg"
+          avatar={user?.photoUrl}
           title="Me"
           onClick={logoutOfApp}
         />
