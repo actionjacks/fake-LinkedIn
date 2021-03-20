@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import "./App.css";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Feed from "./components/Feed";
 import Login from "./components/Login";
+import Widgets from "./components/Widgets";
+import "./App.css";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser, login, logout } from "./features/userSlice";
@@ -41,6 +42,7 @@ function App() {
         <div className="app__body">
           <Sidebar />
           <Feed />
+          <Widgets />
         </div>
       )}
     </div>
